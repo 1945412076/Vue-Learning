@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.set的使用</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!--vue.set只能在data里对象添加属性-->
+    <div id="root">
+        <h2>姓名{{student.name}}</h1>
+        <button @click="add">添加一个性别，默认为男</button>
+        <h2>年龄:{{student.age}}</h2>
+        <h2 v-if="student.sex">性别:{{student.sex}}</h2>
+        <h2>朋友</h2>
+        <ul>
+            <li v-for="(value,index) in student.friends" :key="index">
+                {{value.name}}-{{value.age}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        Vue.config.productionti=false//阻止vue在启动时生成生产提示。
+       const vm= new Vue({
+            el:'#root',
+            data:{
+                student:{
+                    name:'李佳忆',
+                    age:18,
+                    friends:[
+                        {name:'屈晓洁' ,age:'18'},
+                        {name:"董万凯强",age:'18'},
+                    ]
+                }
+            },
+            methods:{
+                add(){
+                    Vue.set(this.student,'sex','男')
+                }
+            },
+        })
+    </script>
+</body>
+</html>

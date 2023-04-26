@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/vue.js"></script>
+    <script src="../js/dayjs.min.js"></script>
+    <title>过滤器</title>
+</head>
+<body>
+    <!--创建一个容器-->
+    <div class="root">
+        <h1>现在时间戳:{{date}}</h1>
+        <button @click="nowdate">开始</button><br>
+        <button @click="over">停止</button>
+        <!-- <h3>计算属性:{{computeddate}}</h3> -->
+        <!--插值函数-->
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionti=false//阻止vue在启动时生成生产提示。
+        //创建Vue实例
+        
+         const vm=new Vue({
+            el:'.root',
+            data:{
+                date:new Date,
+                timer:"",
+            },
+            methods: {
+                nowdate(){
+                  this.tem= setInterval(this.update,1000)
+                },
+                update(){
+                    this.date=new Date()
+                },
+                over(){
+                    clearInterval(this.timer);
+                    console.log('sss');
+                }
+            },
+            mounted() {},
+  beforeDestroy() {
+    clearInterval(this.timer);
+  },
+            computed:{
+            
+            }
+            
+        })
+    </script>
+</body>
+</html>

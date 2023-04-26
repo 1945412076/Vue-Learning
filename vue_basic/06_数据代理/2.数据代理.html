@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据代理</title>
+</head>
+<body>
+    <script>
+        let obj={name:"李记忆"}
+        let obj2={age:'男'}
+        console.log(obj);
+        Object.defineProperty(obj,'age',{
+            get(){
+                return obj2.age;
+            },
+            set(value){
+                obj2.age=value
+            }
+            
+        })
+    </script>
+</body>
+</html>

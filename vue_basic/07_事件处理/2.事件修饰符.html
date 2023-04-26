@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<style>
+    *{
+        margin-top: 20px;
+    }
+    .demo{
+        height: 50px;
+        background-color: skyblue;
+    }
+    .box1{
+        padding: 5px;
+        background-color: skyblue;
+    }
+    .box2{
+        padding: 5px;
+        background-color: orange;
+    }
+</style>
+<body>
+    <!--
+        事件可以连着写
+        Vue中的事件修饰符：
+        1.prevent：阻止默认事件（常用）；
+        2.stop：阻止事件冒泡（常用）；
+        3.once:事件之出发一次（常用）；
+        4.capture:使用事件的捕获模式处理事件；
+        5.self：只有event.target是当前操作的元素才触发事件；
+        6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕；
+    -->
+    <div id="root">
+        <h2>欢迎来到{{name}}学习</h2>
+        <a href="https://vuejs.org/guide/introduction.html" @click.prevent="showIN">点击信息展示</a>
+       
+        <div class="demo" @click="showMg">
+            <button @click.stop="showIN">点击展示信息</button> 
+        </div>
+        <div class="demo2">
+            <button @click.once="showIN">点击信息展示</button>
+        </div>
+        <div class="box1" @click.capture="showMg(1)">
+            div
+            <div class="box2" @click="showMg(2)">div</div>
+        </div>
+        <div @click.self="showIF">
+            <button @click="showIN">按钮</button>
+        </div>
+    </div>
+  
+    <script>
+        Vue.config.productionti=false//阻止vue在启动时生成生产提示。
+
+        const vm=new Vue({
+            el:'#root',
+            data:{
+                name:'vue',
+            },
+            methods:{
+                showIN(event){
+                    alert("查看")
+                    console.log(event.target);
+                },
+                showMg(mg){
+                    console.log(mg);
+                    console.log(event.target);
+                },
+                showIF(e){
+                    alert("同学你好！")
+                }
+            },
+        })
+    </script>
+</body>
+</html>

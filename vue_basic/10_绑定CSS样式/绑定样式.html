@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绑定样式</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .basic{
+            height: 50px;
+            width: 60%;
+            border: solid;
+        }
+        .happy{
+            background-color: rgb(0, 204, 255);
+        }
+        .once{
+            background-color: rgb(255, 140, 0);
+        }
+        .bian{
+            border-radius: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="basic" :class="mood" @click="cheng(),b++">
+            {{b}}
+        </div><hr>
+        <div class="basic" :class="arr"></div>
+    </div>
+    <script>
+        Vue.config.productionti=false//阻止vue在启动时生成生产提示。
+        
+        const vm =new Vue({
+            el:'#root',
+            data:{
+                mood:'happy',
+                b:'1',
+                arr:['once','bian']
+            
+            },
+            methods: {
+                cheng(){
+                    this.mood='once'
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表过滤</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div>
+            <input type="text" placeholder="请输入姓名" v-model="keywatch">
+            <button @click="keyset=1">年龄升序</button>
+            <button @click="keyset=2">年龄降序</button>
+            <button @click="keyset=-1">年龄原序</button>
+            <h2>人员信息</h2>
+            
+            <ul>
+                <li v-for="(value,index) of filpersons" :key="value.id">
+                    {{value.name}}-{{value.age}}-{{value.sex}}
+                    <input type="text">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        Vue.config.productionti=false//阻止vue在启动时生成生产提示。
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                persons:[
+                    {id:'001',name:'马冬梅',age:28,sex:'女'},
+                    {id:'002',name:'马后炮',age:40,sex:'男'},
+                    {id:'003',name:'周杰伦',age:30,sex:'男'},
+                    {id:'004',name:'周深',age:40,sex:'男'},
+                ],
+                keywatch:'',
+                keyset:-1,
+                // filpersons:[],
+            },
+            computed:{
+                filpersons:{
+                    //总结filter的使用：1.filter是筛选函数，不会改变数数组的结构；2.filter后面跟的是条件表达式，
+                    //总结indexOf：用来遍历字符串
+                    get(){
+                          const arr=this.persons.filter((p)=>{
+                            return p.name.indexOf(this.keywatch) !==-1
+                        })
+                        if(this.keyset)
+                        {
+                            //arr.sort((a,b)=>{})
+                             arr.sort((a,b)=>{
+                                return this.keyset==1 ?a.age-b.age:b.age-a.age
+                            })
+                        }
+                        return arr
+                    },
+                    // set(){
+                    // },
+                }
+            },
+            methods: {
+                
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>试试</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div class="root">
+        <input type="text" v-model:value="text">
+        <h1>{{text}}</h1>
+    </div>
+    <script>
+        const vm=new Vue({
+            el:".root",
+            data(){
+                return{
+                    text:'nihao'//这个
+                }
+            }
+        })
+        console.log(vm._data);
+    </script>
+</body>
+</html>

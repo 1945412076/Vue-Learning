@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/vue.js"></script>
+    <title>自定义指令</title>
+</head>
+<body>
+    <!--创建一个容器-->
+    <div class="root">
+        <h1>你好,{{name}}{{dom.toUpperCase()}}</h1>
+        <h2>初始值n:{{n}}</h2>
+        <h2>十倍的n值:<span v-big="n"></span></h2>
+        <button @click="n++">n++</button><br>
+        <input type="text" v-fbind:value="n">
+        <!--插值函数-->
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionti=false//阻止vue在启动时生成生产提示。
+        //创建Vue实例
+        
+         const vm=new Vue({
+            el:'.root',
+            data:{ 
+                name:'世界',dom:'love',
+                n:1
+            },
+            directives:{
+                //big什么时候被调用？1.元素和指令成功绑定的时候  2.指令所在的模版被重新解析的时候
+                big(element,binding){
+                    //element是该元素的节点
+                    //binding节点信息
+                    console.log(binding);
+                    console.log(element);
+                    element.innerText = binding.value*10
+                },
+                fbind:{
+                    //指令与元素成功绑定
+                    bind(element,binding){
+                        element.value=binding.value
+                    },
+                    //指令所在元素被插入页面
+                    inserted(element,binding){
+                        element.focus()
+                    },
+                    //指令所在模版被重新解析
+                    update(element,binding){
+                        element.value=binding.value
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

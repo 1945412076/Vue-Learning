@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/vue.js"></script>
+    <title>生命周期总结</title>
+</head>
+<body>
+    <!--创建一个容器-->
+    <div class="root">
+        <h1 :style="{opacity}">淡出vue</h1>
+        <button @click="stop()">销毁vue</button>
+        <!--插值函数-->
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionti=false//阻止vue在启动时生成生产提示。
+        //创建Vue实例
+         const vm=new Vue({
+            el:'.root',
+            data:{ 
+                opacity:1,
+            },
+            methods: {
+                stop(){
+                    this.$destroy()
+                }
+            },
+            //vue完成模版解析初始的真实DOM元素放入页面中(完成挂载)，调用mounted函数
+           mounted() {
+             this.a= setInterval(()=>{
+                console.log(setInterval);
+                    this.opacity -=0.01
+                    if(this.opacity<=0)
+                    {this.opacity=1}
+                },16)
+                
+           },
+
+           beforeCreate() {
+                console.log(this);
+           },
+           created() {
+                console.log(this);
+           },
+           beforeDestroy() {
+                clearInterval(this.a)
+           },
+        })
+    </script>
+</body>
+</html>

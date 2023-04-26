@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>深度监听</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>a:{{nameber.a}}</h1>
+        <h1>b:{{nameber.b}}</h1>
+        <button @click="nameber.a++">点击a增加</a></button>
+        <button @click="nameber.b++">点击b增加</a></button>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                nameber:{
+                    a:1,
+                    b:1
+                }
+            },
+            watch:{
+                //单独监听a
+                'nameber.a':{
+                    //深度监听
+                    // deep:true,
+                    handler(){
+                        console.log("nameber.a被监听了");
+                    }
+                },
+                //监听nameber的变化
+                nameber:{
+                    deep:true,
+                    handler(){
+                        console.log("nameber被监听了");
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

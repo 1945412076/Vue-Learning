@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/vue.js"></script>
+    <script src="../js/dayjs.min.js"></script>
+    <title>过滤器</title>
+</head>
+<body>
+    <!--创建一个容器-->
+    <div class="root">
+        <h1>时间戳{{time}}</h1>
+        <h2>使用计算属性换算时间:{{computeddate}}</h2>
+        <h2>使用methods换算时间:{{methodsdate()}}</h2>
+        <!--过滤器实现-->
+        <h2>过滤器:{{time | timeFormt }}</h2>
+        <!--过滤器的传参-->
+        <h2>过滤器:{{time | timeFormt("YYYY年MM月DD日")}}</h2>
+        <!--多个过滤器-->
+        <h2>过滤器:{{time | timeFormt | myslice}}</h2>
+        <!--插值函数-->
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionti=false//阻止vue在启动时生成生产提示。
+        //全局过滤器
+        Vue.filter('myslice',function(value){
+            return value.slice(0,4)
+        })
+        //创建Vue实例
+         const vm=new Vue({
+            el:'.root',
+            data() {
+                return {
+                    time:Date.now()
+                }
+            },
+            computed:{
+                computeddate(){
+                    return dayjs(this.time).format('YYYY年MM月DD日 HH:MM:ss')
+                }
+            },
+            methods: {
+                methodsdate(){
+                    return dayjs(this.time).format("YYYY年MM月DD日 HH:MM:ss")
+                }
+            },
+            filters:{
+                timeFormt(value ,srt='YYYY年MM月DD日 HH:MM:ss'){
+                    return dayjs(value).format(srt)
+                },
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的注意项</title> 
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <app></app>
+    </div>
+</body>
+    <script>
+        Vue.config.productionti=false//阻止vue在启动时生成生产提示。
+
+        //第一步创建组件
+        const school=Vue.extend({
+            //基本框架
+            template:'<div><h2>学校:</h2>{{name}}<h2>地址</h2>{{DZ}}</div>',
+            data(){
+                return{
+                    name:"武汉大学",
+                    DZ:'武汉光谷'
+                }
+            }
+            
+        })
+       //第二种创建组件的方法
+        const student={
+            template:'<div><h2>姓名:{{name}}</h2><h2>年龄:{{age}}</h2></div>',
+            data(){
+                return{
+                name:'董万凯强',
+                age:'21'}
+            }
+        }
+        const app=Vue.extend({
+            template:
+                `<div>
+                    <school></school>
+                    <student></student>
+                </div>`,
+            components:{
+                school,
+                student,
+            }
+        })
+        new Vue({
+            el:'#root',
+            //第二步注册组件
+            components:{
+              app
+            }
+        })
+    </script>
+</html>

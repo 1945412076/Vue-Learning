@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件的基本使用</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <button v-on:click="showINfo1">点击展示信息1</button>
+        <button @click="showINfo2($event,66)">点击展示信息2</button>
+        <h1>{{name}}</h1>
+    </div>
+    <script>
+        Vue.config.productionTip=false;
+        const vm=new Vue({
+            el:'#root',
+            data:{
+                name:"你好"
+            },
+            methods:{
+                showINfo1(event){
+                    alert("展示信息")
+                },
+                showINfo2(event,number){
+                    // alert(a,number)
+                    console.log("xxxx");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

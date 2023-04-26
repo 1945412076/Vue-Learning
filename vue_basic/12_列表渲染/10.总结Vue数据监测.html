@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>总结Vue数据监测</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>学生信息</h1>
+
+        <button @click="addage">年龄+1</button>
+        <button @click="addsex">添加一个性别，默认为男</button>
+        <button @click="updatasex">修改性别</button>
+        <button @click="addfriebds">在列表里添加一个朋友</button>
+        <button @click="addhappy">添加一个爱好</button>
+        <button @click="updatahappy">修改第一个爱好</button>
+        <button @click="guolu()">过滤去爱好中的抽烟</button>
+        <h3>姓名:{{student.name}}</h3>
+        <h3>年龄:{{student.age}}</h3>
+        <h3 v-if="student.sex">性别:{{student.sex}}</h3>
+        <h3>爱好:</h3>
+        <ul>
+            <li v-for="(h,index) in student.happy" :key="index">
+                {{h}}
+            </li>
+        </ul>
+        <h3>朋友:</h3>
+        <ul v-for="(f,index) in student.friends" :key="index">
+            <li>
+                {{f.name}}-{{f.age}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        Vue.config.productionti=false//阻止vue在启动时生成生产提示。
+
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                student:{
+                    name:'刘新桥',
+                    age:18,
+                    happy:['抽烟','喝酒','烫头'],
+                    friends:[
+                        {name:'董万凯强',age:'21'},
+                        {name:'艾杰',age:'21'},
+                    ]
+                }
+            },
+            methods: {
+                addage(){
+                    this.student.age++
+                },
+                addsex(){
+                    this.$set(this.student,'sex','男')
+                    //Vue.set(this.student,'sex','男')
+                }, 
+                updatasex(){
+                    this.student.sex='男' ? '女':'男'
+                },
+                addfriebds(){
+                    this.student.friends.unshift({name:'李四',age:'8'} )
+                },
+                addhappy(){
+                    this.student.happy.push('开车')
+                },
+                updatahappy(){
+                    this.student.happy.splice(0,1,'学习')
+                },
+                guolu(){
+                    this.student.happy=this.student.happy.filter((h)=>{
+                        return h !='抽烟'
+                    })
+                }
+            },
+        })
+    </script>
+</body>
+</html>

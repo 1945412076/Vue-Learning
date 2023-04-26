@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        当前n的值:{{n}}<br>
+        <button @click="an()">标题</button><hr>
+        <button @click="chang()">点击我出样式</button><hr>
+        <!-- v-show页面会保存节点
+        <div v-show="a">架构历程</div>
+        <div v-show='n===1'>Angular</div>
+        <div v-show='n===2'>React</div>
+        <div v-show='n===3'>Vue</div> -->
+
+        <!-- v-if页面不会保存节点 -->
+        <!-- <div v-if="a">架构历程</div>
+        <div v-if='n===1'>Angular</div>
+        <div v-if='n===2'>React</div>
+        <div v-if='n===3'>Vue</div> -->
+
+        <!--v-else-if和v-else使用方法-->
+        <!-- <div v-if="a">架构历程</div>
+        <div v-if='n===1'>Angular</div>
+        <div v-else-if='n===2'>React</div>
+        <div v-else>Vue</div> -->
+
+        <!--v-if和template-->
+        <div v-show="a">展示类容:</div>
+        <template v-if="n===1">
+            <h2>董万凯强</h2>
+            <h2>学习</h2>
+            <h2>Vue</h2>
+        </template>
+    </div>
+    <script>
+        Vue.config.productionti=false//阻止vue在启动时生成生产提示。
+        const vm=new Vue({
+            el:'#root',
+            data() {
+                return {
+                    n:0,
+                    a:true
+                }
+            },
+            methods: {
+                chang(){
+                   if(this.n%3<=3)
+                    {this.n++}
+                  if(this.n>3)
+                  {this.n=0}
+                },
+                an(){
+                    this.a=!this.a
+                }
+            },
+        })
+    </script>
+</body>
+</html>

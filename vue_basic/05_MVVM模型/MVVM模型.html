@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MVVM模型</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>地址：{{adder}}</h1>
+        <h1>收件人：{{name}}</h1>
+    </div>
+    <script>
+         Vue.config.productionTip = false
+         const vm=new Vue({
+            el:'#root',
+                data(){
+                    return{  
+                    name:'董万凯强',
+                    adder:'荆州'
+                }}
+          
+         })
+         console.log(vm);
+    </script>
+</body>
+</html>

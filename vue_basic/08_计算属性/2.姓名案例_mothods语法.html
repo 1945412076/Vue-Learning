@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>metjods案例</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        姓：<input type="text" v-model="firstName"><br>
+        名：<input type="text" v-model="lastName"><br>
+        全名:<span>{{name()}}</span>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip=false;
+
+        const vm= new Vue({
+            el:'#root',
+            data:{
+                firstName:'董万',
+                lastName:'凯强',
+            },
+            methods:{
+                name(){
+                    return this.firstName+"-"+this.lastName
+                }
+            }
+        })
+    </script>
+</body>
+</html>

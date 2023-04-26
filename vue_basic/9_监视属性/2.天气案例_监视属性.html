@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>今天天气很{{info}}</h1>
+        <button @click="chang()">改变太天气</button>
+    </div>
+    <script>
+        const vm= new Vue({
+            el:'#root',
+            //数据
+            data:{
+                inhot:true
+            },
+            //存放方法
+            methods: {
+                chang(){
+                    this.inhot=!this.inhot
+                },
+            },
+            //计算属性
+            computed:{
+                info:{
+                    get(){
+                    return this.inhot?"炎热":"沁爽"
+                }
+                }    
+            },
+            //监控属性
+            // watch:{
+            //     inhot:{
+            //        immediate:true,//初始时让handler调用一下
+            //        //handler什么时候被调用？inhot被修改的时候
+            //        handler(newValue,oldValue){
+            //         console.log('get被修改了',newValue,oldValue);
+            //        } 
+            //     }
+            // }
+           
+        })
+         //监控属性方法二
+        vm.$watch('inhot',{
+            immediate:true,
+            handler(newValue,oldValue){
+                console.log('x',x,y);
+            }
+        })
+    </script>
+</html>

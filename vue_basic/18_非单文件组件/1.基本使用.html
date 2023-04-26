@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基本使用</title> 
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <hello></hello>
+        <school></school>
+    </div>
+</body>
+        <!--
+            Vue中使用组件的三大步骤：
+                1.定义组件（创建组件），
+                2.注册组件 component
+                3.使用组件（写组件标签）
+
+            一、如何定义一个组件？
+                使用Vue.extend(option)创建，其中options和new Vue（options）时传入的那个options几乎一样，但也有区别
+                    区别如下：
+                            1.el不要写，为什么？———— 最终所有的组件都是vm管理，由vm中的el决定服务那个容器
+                            2.data必须写成函数，为什么？ ———— 避免组件被复用时数据引用关系。
+                    备注：使用template配置组件结构.
+            
+            二、如何注册组件？
+							1.局部注册：靠new Vue的时候传入components选项
+							2.全局注册：靠Vue.component('组件名',组件)
+
+			三、编写组件标签：
+							<school></school>
+        -->
+    <script>
+        Vue.config.productionti=false//阻止vue在启动时生成生产提示。
+
+        // 全局组件
+        const hello= Vue.extend({
+            template:"<div>你好，{{name}}</div>",
+            data(){
+                return{
+                    name:'世界',
+                }
+            }
+        })
+        Vue.component('hello',hello)
+        //第一步创建组件
+        // const school=Vue.extend({
+        //     //基本框架
+        //     template:'<div><h2>学校:</h2>{{name}}<h2>地址</h2>{{DZ}}</div>',
+        //     data(){
+        //         return{
+        //             name:"武汉大学",
+        //             DZ:'武汉光谷'
+        //         }
+        //     }
+        // })
+        //方法二
+        const school={
+               //基本框架
+               template:'<div><h2>学校:</h2>{{name}}<h2>地址</h2>{{DZ}}</div>',
+            data(){
+                return{
+                    name:"武汉大学",
+                    DZ:'武汉光谷'
+                }
+            }
+        }
+        new Vue({
+            el:'#root',
+            //第二步注册组件
+            components:{
+                school:school,
+            }
+        })
+    </script>
+</html>
